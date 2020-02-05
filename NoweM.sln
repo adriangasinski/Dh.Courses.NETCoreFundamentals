@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoweM", "NoweM\NoweM.csproj", "{A3E628D0-EAD9-4D41-A82E-D825E06EABF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoweM", "NoweM\NoweM.csproj", "{A3E628D0-EAD9-4D41-A82E-D825E06EABF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoweM.Core", "NoweM.Core\NoweM.Core.csproj", "{8C4906C3-4FEB-4899-9477-9063F856C584}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoweM.Data", "NoweM.Data\NoweM.Data.csproj", "{F3F189D7-BDF1-46C9-B19E-029B3CBC8D9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{A3E628D0-EAD9-4D41-A82E-D825E06EABF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E628D0-EAD9-4D41-A82E-D825E06EABF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E628D0-EAD9-4D41-A82E-D825E06EABF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C4906C3-4FEB-4899-9477-9063F856C584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C4906C3-4FEB-4899-9477-9063F856C584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C4906C3-4FEB-4899-9477-9063F856C584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C4906C3-4FEB-4899-9477-9063F856C584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F189D7-BDF1-46C9-B19E-029B3CBC8D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F189D7-BDF1-46C9-B19E-029B3CBC8D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F189D7-BDF1-46C9-B19E-029B3CBC8D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F189D7-BDF1-46C9-B19E-029B3CBC8D9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

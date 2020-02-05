@@ -1,0 +1,23 @@
+﻿@page
+@model NoweM.ListaModel
+@{
+    ViewData["Title"] = "Lista";
+}
+
+<h1>Nowe domy w Płocku</h1>
+
+<table class="table">
+    @foreach(var house in Model.Houses)
+    {
+        <tr>
+            <td>@house.Address</td>
+            <td>@house.NumberOfHouses</td>
+            <td>@house.HType</td>
+        </tr>
+    }
+</table>
+
+@Model.Message <br />
+
+@Model.MessageFromConfig
+

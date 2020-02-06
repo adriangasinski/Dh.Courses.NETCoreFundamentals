@@ -1,0 +1,22 @@
+﻿@page "{houseId:int}"
+@model NoweM.DetailModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h2>@Model.House.Address</h2>
+
+<div>
+    Id: @Model.House.Id
+</div>
+<div>
+    Liczba dostępnych domów: @Model.House.NumberOfHouses
+</div>
+<div>
+    Deweloper: @Model.House.DevId
+</div>
+<div>
+    Rodzaj budynku: @Model.House.HType
+</div>
+
+<a asp-page="./List" class="btn btn-default">Wróć do listy domów</a>

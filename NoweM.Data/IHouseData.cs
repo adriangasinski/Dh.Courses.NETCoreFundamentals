@@ -8,7 +8,8 @@ namespace NoweM.Data
 {
     public interface IHouseData
     {
-        IEnumerable<House> GetAll();
+        IEnumerable<House> GetHousesByAddress(string name);
+        House GetHouseById(int houseId);
 
     }
 
@@ -28,12 +29,21 @@ namespace NoweM.Data
             };
 
         }
-        public IEnumerable<House> GetAll()
+
+        public House GetHouseById(int houseId)
+        {
+            return houses.SingleOrDefault(r => r.Id == houseId);
+        }
+
+        public IEnumerable<House> GetHousesByAddress(string name = null)
         {
             return from h in houses
+                   where string.IsNullOrEmpty(name) || h.Address.ToLower().Contains(name.ToLower())
                    orderby h.Address
                    select h;
         }
+
+        
     }
 
 }

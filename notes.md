@@ -96,5 +96,96 @@ Startup.cs file
 Then in a constructor of pagemodel we add a parameter IHouseData.
 And create field to containt it. 
 
-## Module 2 
+## Module 2 - Working with models and model binding
+
+### HTML forms
+<form> without action parameter will send data to the same address. 
+<form action="/update">
+
+button that confrims submitting form should have type = "submit"
+<button type="submit">Save</button>
+
+
+in form tag we can specify method we want to use
+<form method="get">
+
+when we edit data we need to do it by post request. 
+when we want to filter some data it is ok to use get method. So that user can bookmark this URL to get results.
+
+
+### Model binding
+1. Inputs we need to use in pagemodel should be named. 
+2. To get this value I could user HttpContext property 
+3. Better way to do that is model binding. 
+    3.1 I can add a parameter to my OnGet method with the same name as an input.
+    3.2 Another way is to create property named like input but we will come back to that later. 
+
+If there is no such named parameter in query string of request:
+  - in case of reference types (like string) model binder will assign null reference
+  - in case of value types (like int) it wiil throw an exception
+
+
+To use somethign in both cases - as input model and output model I can define property and decorate it with special attribute
+``` c#
+[BindProperty]
+public string SearchTerm { get; set; }
+
+```
+
+So we no longer need an argument in OnGet method. Model binder will automatically assign value to property. 
+
+
+One thing to note 
+    - by default bind properties are assigned only during http post request. 
+    - we can use special flag
+
+``` c#
+[BindProperty(SupportsGet=true)]
+public string SearchTerm {get; set;}
+```
+
+### asp-for tag helper
+
+This input is for property in a pagemodel 
+
+It makes 2 way data binding.
+
+
+### asp-route tag helper
+tag helper to provide value to page parameter
+
+``` c#
+<a asp-page="./Detail" asp-route-houseId="@house.Id"></a>
+```
+
+
+It was one way to provide information to other page model. 
+The another way is to use routing and place value in a path. 
+
+We can specify argument in a pagemodel 
+
+``` c#
+@page "{id}"
+```
+
+I can set constraint on type
+
+``` c#
+@page "{id:int}"
+```
+
+I can also make this parameter optioinal. 
+``` c#
+@page "{id?:int}"
+```
+
+Now the third segment of URL (Domy/Detail/X) will be recognized as id. 
+
+### Handling bad request
+if method OnGet is void program will render view associated with pagemodel. 
+
+We can takeover control of this behaviour. 
+1. We define that OnGet returns IActionResult
+2. We can say return Page(); to render the view the same way as before. 
+3. We can also return RedirectToPage("./NotFound");
 

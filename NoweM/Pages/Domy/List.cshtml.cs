@@ -18,6 +18,9 @@ namespace NoweM
         public string Message { get; set; }
         public string MessageFromConfig { get; set; }
         public IEnumerable<House> Houses { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
         public ListaModel(IConfiguration config, IHouseData houseData)
         {
             this.config = config;
@@ -27,7 +30,7 @@ namespace NoweM
         {
             Message = "Hello world!";
             MessageFromConfig = config["Message"];
-            Houses = houseData.GetAll();
+            Houses = houseData.GetHousesByAddress(SearchTerm);
 
         }
     }

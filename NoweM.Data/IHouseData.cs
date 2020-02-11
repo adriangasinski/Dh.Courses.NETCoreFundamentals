@@ -10,6 +10,9 @@ namespace NoweM.Data
     {
         IEnumerable<House> GetHousesByAddress(string name);
         House GetHouseById(int houseId);
+        House Update(House updatedHouse);
+        House Add(House newHouse);
+        int Commit();
 
     }
 
@@ -30,6 +33,18 @@ namespace NoweM.Data
 
         }
 
+        public int Commit()
+        {
+            return 0;
+        }
+
+        public House Add(House newHouse)
+        {
+            houses.Add(newHouse);
+            newHouse.Id = houses.Max(h => h.Id) + 1;
+            return newHouse;
+        }
+
         public House GetHouseById(int houseId)
         {
             return houses.SingleOrDefault(r => r.Id == houseId);
@@ -43,7 +58,17 @@ namespace NoweM.Data
                    select h;
         }
 
-        
+        public House Update(House updatedHouse)
+        {
+            var house = houses.SingleOrDefault(h => h.Id == updatedHouse.Id);
+            if (house != null)
+            {
+                house.Address = updatedHouse.Address;
+                house.NumberOfHouses = updatedHouse.NumberOfHouses;
+                house.HType = updatedHouse.HType;
+            }
+            return house;
+        }
     }
 
 }

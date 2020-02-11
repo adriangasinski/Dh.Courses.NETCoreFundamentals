@@ -14,6 +14,8 @@ namespace NoweM
         private readonly IHouseData houseData;
 
         public House House { get; set; }
+        [TempData]
+        public string Message { get; set; }
 
         public DetailModel(IHouseData houseData)
         {            

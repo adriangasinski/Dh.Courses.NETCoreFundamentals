@@ -6,6 +6,11 @@
 
 <h2>@Model.House.Address</h2>
 
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
 <div>
     Id: @Model.House.Id
 </div>
@@ -18,5 +23,6 @@
 <div>
     Rodzaj budynku: @Model.House.HType
 </div>
+
 
 <a asp-page="./List" class="btn btn-default">Wróć do listy domów</a>

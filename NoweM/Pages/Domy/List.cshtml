@@ -20,21 +20,28 @@
 <table class="table">
     @foreach(var house in Model.Houses)
     {
-        <tr>
-            <td>@house.Address</td>
-            <td>@house.NumberOfHouses</td>
-            <td>@house.HType</td>
-            <td>
-                <a class="btn btn-lg"
-                   asp-page="./Detail" 
-                   asp-route-houseId="@house.Id"
-                   >
-                    <i class="glyphicon glyphicon-zoom-in"></i>
-                </a>
-            </td>
-        </tr>
+    <tr>
+        <td>@house.Address</td>
+        <td>@house.NumberOfHouses</td>
+        <td>@house.HType</td>
+        <td>
+            <a class="btn btn-lg"
+               asp-page="./Detail"
+               asp-route-houseId="@house.Id">
+                <i class="glyphicon glyphicon-zoom-in"></i>
+            </a>
+        </td>
+        <td>
+            <a class="btn btn-lg"
+               asp-page="./Edit"
+               asp-route-houseId="@house.Id">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+        </td>
+    </tr>
     }
 </table>
+<a asp-page="./Edit" class="btn btn-primary">Dodaj nowy</a> <br />
 
 @Model.Message <br />
 

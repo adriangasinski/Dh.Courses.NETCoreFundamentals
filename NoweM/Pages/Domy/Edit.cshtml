@@ -1,0 +1,28 @@
+﻿@page "{houseId:int?}"
+@model NoweM.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Editing @Model.House.Address</h2>
+<form method="post">
+    <input type="hidden" asp-for="House.Id" />
+    <div class="form-group">
+        <label asp-for="House.Address"></label>
+        <span class="text-danger" asp-validation-for="House.Address"></span>
+        <input asp-for="House.Address" />
+    </div>
+    <div class="form-group">
+        <label>Liczba obiektów</label>
+        <span class="text-danger" asp-validation-for="House.NumberOfHouses"></span>
+        <input asp-for="House.NumberOfHouses" />
+    </div>
+    <div class="form-group">
+        <label>Rodzaj budynku</label>
+        <span class="text-danger" asp-validation-for="House.HType"></span>
+        <select class="form-control" asp-for="House.HType"
+                asp-items="Model.HouseTypes">
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

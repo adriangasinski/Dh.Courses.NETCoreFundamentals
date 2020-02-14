@@ -259,3 +259,60 @@ To display it in next view we can:
 
 
 
+## Module 4 - Working with SQL Server and the Entity Framework Core
+
+Installation of 3 pakcages:
+1. EntityFrameworkCore
+2. EntityFrameworkCore.Sqlserver
+3. EntityFrameworkCore.Design
+
+To use datbase we need to create a class that will inherits after EntityFramewok.DbContext.
+
+1. We create a class NoweMDbContext in NoweM.Data Project that inherit from DbContext. It Should be public class.
+2. public DbSet<House> Houses { get; set; } - it says EF that I want to have a table with ability to insert/update/delete.
+3. EF can create DB Schema based on information that we provide in DbContext. This feature is called migration. 
+4. To make migration we need to go to the project .Data folder in command line and use dotnet ef. 
+5. Now we need to add to our project information about DB engine we want to use. For this project we will use sqlserver localdb but thera are many other options. To explore them look for EF Database providers. There are postgres, mysql and sql available. 
+6. View - SqlServer Object Explorer
+7. During development we are going to store connection string in appsettings.json file. Here is the connection string for localdb with integrated windows security instead of login and pasword.
+``` json
+"ConnectionStrings": {
+    "NoweMDb" :  "Data source=(localdb)\\MSSQLLocalDB;Initial Catalog=NoweM;Integrated security=True;"
+  }
+```
+8.  In Startup.cs in ConfigureServices method
+```c#
+services.AddDbContextPool<NoweMDbContext>(options =>
+    {
+        options.UseSqlServer(Configuration.GetConnectionString("NoweMDb"));
+    });
+```
+8. In the NoweMDbContext class
+    8.1 create constructor that takes options parameter and pass it to base class. 
+
+``` c#
+ public NoweMDbContext(DbContextOptions<NoweMDbContext> options)
+            :base(options)
+        {
+
+        }
+```
+9. Now we can go back to command line:
+    9.1 dotnet ef dbcontext info -s ..\NoweM\NoweM.csproj
+    9.2 now we need to create migration - dotnet ef migrations
+        script - will generate sql script 
+        add - to add new migration
+        dotnet ef migrations add initialcreate (it's name) -s ..\NoweM\NoweM.csproj
+
+    9.3 In NoweM.Data project there is a folder named migrations. 
+
+### Runing database migration
+
+dotnet ef database update -s ..\NoweM\NoweM.csproj
+
+
+Now we need to create a class SqlHouseData that implements IHouseData. And implement EF version of cruds. 
+
+### Modifying service registration
+1. We need to replace class InMemory.. to Sql... in CofingureServices method in startup.cs
+2. We need to change AddSingleton to AddScoeped - add scoped is generally what we want to use when we work with DB and EF. 

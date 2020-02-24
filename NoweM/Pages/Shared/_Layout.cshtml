@@ -46,6 +46,8 @@
         @RenderBody()
         <hr />
         <footer>
+            <vc:house-count></vc:house-count>
+            @RenderSection("footer", required : false)
             <p>&copy; 2020 - NoweM</p>
         </footer>
     </div>

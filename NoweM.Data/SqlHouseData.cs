@@ -54,6 +54,11 @@ namespace NoweM.Data
             return query;
         }
 
+        public int GetHousesCount()
+        {
+            return db.Houses.Count();
+        }
+
         public House Update(House updatedHouse)
         {
             var entity = db.Houses.Attach(updatedHouse);

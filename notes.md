@@ -316,3 +316,86 @@ Now we need to create a class SqlHouseData that implements IHouseData. And imple
 ### Modifying service registration
 1. We need to replace class InMemory.. to Sql... in CofingureServices method in startup.cs
 2. We need to change AddSingleton to AddScoeped - add scoped is generally what we want to use when we work with DB and EF. 
+
+
+## Module 5 - Building the user interface
+
+### _Layout.cshtml
+1. It doesn't have to be in shared folders. But it's kind of convention. 
+2. It's not Razorpage. It doesn't have a @page directive. It's not cosidered in routing. 
+3. Leading underscore _ - it's not required but it's convetion. It is an indication that this page should not be used to render a view on its own. 
+
+
+Content of RazorPage will go to the place where we have got @RenderBody() statement in _layout.cshtml
+
+We can also use @RenderSection when we want to add something to other part of layout (i.e footer).
+
+@RenderSection(footer, required: false)
+
+In page we add:
+@section footer {
+  //code to show in footer. 
+}
+
+To use other layout we add delete page and uncheck the option "use default layout page".
+In cshtml file there is a @{ } property with addontation in it - Layout = null;
+
+We need to care about css and javascript on our own. 
+
+### Assigning Layout variable
+When we assign layout variable in a page our program will look for cshtml file named such as we provided in multiple folders. 
+
+
+### _ViewStart.cshtml
+Here is the code that is executed before the page is executed. 
+
+### _ViewImports file
+
+We can use it to:
+ 1. Add a using statements
+ 2. Add a namespace
+ 3. Add a tag helper
+
+ ### Partial view
+1. We can break up complex view into partial pieces. 
+2. We can reuse chunks of html
+
+add -> new razor page -> create as a partial view
+
+name of partial view should start from leading underscore(_) to indicate that it is not a page. 
+
+To use partial view in a page we should use tag helper - <partial name="_Summary" model="house" />
+
+Partial views works well when I have the model or part of the model and I want to present it and reuse this presentation. 
+
+When we need more autonomus component - something like partial view but with its own data access we shoud turn to ViewComponents. 
+
+
+
+### View component
+To show something on every page  we would use a layout view. But layout view is only .cshtml it does not have any page model. 
+
+1. Add new folder - ViewComponents
+2. Add a class in this folder 
+3. This class derrives from : ViewComponent class.
+4. View component can have constructor whern we can inject needed data structures. 
+5. There are no OnGet and OnPost methods. There is a method IViewComponentResult Invoke()
+6. In this Invoke method 
+``` c#
+    var count = houseData.GetHousesCount();
+    return View(count);
+```
+
+
+### View for viewcomponent
+
+1. In shared folder we create another folder - Components
+2. Inside component we need to have a folder that matches out viewcomponent name. 
+3. Add new - > Razor View named default ( we can use different name and specify it in invoke method of a view component)
+4. In a view we can use model to build proper html . 
+5. In _ViewImports.cshtml we add a line 
+``` c#
+    @addTagHelper *, NoweM
+```
+6. We use a tag helper <vc:hosue-count></vc:hosue-count> in a layout or any other page. 
+    6.1 To pass parameters we use <vc:hosue-count parametername="parametervalue"></vc:hosue-count>

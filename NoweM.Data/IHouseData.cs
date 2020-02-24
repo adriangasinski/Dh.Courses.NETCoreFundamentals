@@ -12,6 +12,7 @@ namespace NoweM.Data
         House Add(House newHouse);
         House Delete(int houseId);
         int Commit();
+        int GetHousesCount();
 
     }
 }

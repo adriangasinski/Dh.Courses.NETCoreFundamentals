@@ -69,6 +69,11 @@ namespace NoweM.Data
             return house;
             
         }
+
+        public int GetHousesCount()
+        {
+            return houses.Count();
+        }
     }
 
 }

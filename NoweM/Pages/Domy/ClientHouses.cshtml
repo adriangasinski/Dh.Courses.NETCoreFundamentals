@@ -1,0 +1,41 @@
+﻿@page
+@model NoweM.ClientHousesModel
+@{
+    ViewData["Title"] = "ClientHouses";
+}
+
+<h2>Client Houses</h2>
+
+<table class="table" id="houses">
+</table>
+
+@section Scripts{
+
+    <!--<environment include="Development">
+        <script src="C:\dev\NoweM\NoweM\NoweM\node_modules\datatables.net\js\jquery.dataTables.js"></script>
+        <script src="C:\dev\NoweM\NoweM\NoweM\node_modules\datatables.net-bs\js\dataTables.bootstrap.js"></script>
+        <link href="C:\dev\NoweM\NoweM\NoweM\node_modules\datatables.net-bs\css\dataTables.bootstrap.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.20/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/datatables.min.js"></script>
+    <!--</environment>-->
+
+
+    <script>
+        $(function () {
+            $.ajax("/api/houses/",
+                { method: "get" })
+                .then(function (response) {
+                    $("#houses").dataTable({
+                        data: response,
+                        columns: [
+                            { "data": "address" },
+                            { "data": "numberOfHouses" },
+                            { "data": "hType" }
+                        ]
+                    });
+                });
+        });
+    </script>
+}

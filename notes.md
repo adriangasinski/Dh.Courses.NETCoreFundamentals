@@ -399,3 +399,63 @@ To show something on every page  we would use a layout view. But layout view is 
 ```
 6. We use a tag helper <vc:hosue-count></vc:hosue-count> in a layout or any other page. 
     6.1 To pass parameters we use <vc:hosue-count parametername="parametervalue"></vc:hosue-count>
+
+
+## Module 6 - Integrating Client-side Javascript and CSS
+
+### Serving static files
+
+By default static files are in special folder - wwwroot.
+
+tag helper <evnironment include=""> and <environment exclude=""> allows us to load some libs from other location depending on env we are running. 
+We can check env in Properties -> launchSettings.json
+
+### Validation 
+jquery validation lib is already included in the project. Same as jquery-validation-unotrusive that connects .net validation rules with client side - jquery-validation library. 
+
+These libraries are not active by default.
+
+There is a _ValidationScriptsPartial.cshtml in this projects that has got proper includes in it. 
+
+
+In our layout page there is defined a section called scripts. We can inejct partial view with validation there. 
+
+In the edit page (where we need client-side validation) we add:
+``` c#
+@section Scripts {
+    <partial name="_ValidationScriptsPartial">
+}
+```
+
+### Using API 
+
+We could use some fancy framework here like Vue or React but we are gonna keep things simple so we will use pure jquery. 
+
+We create razor page ClientHouses. 
+
+We delete onGet  method in page model. 
+What we do is adding a js script in html file. This script will do API  request. 
+
+1. add new folder Api
+2. Add new -> controller... -> API Controller with actionsusing EF
+3. Scaffolding tool will prepare code to CRUD operations on indicated model. 
+
+### using data tables
+
+Now when we get json data from api we want to present it in user-friendly way. We will use datatables plugin. 
+1. datatables.net -> download
+2. CDN
+3. paste it into layout when we need it in whole application. Alternatively add it to scripts sections in pages where we want to use it. 
+
+
+### Using package manager to install datatabels locally 
+npm 
+
+1. npm init - in root foolder of the project - it cretaes package.json file
+2. npm install --save datatables.net-bs
+
+### Serving static files from node_modules in ASP.NET Core
+
+1. manage nugetpackage
+2. OdeToCode.UseNodeModules - instal
+3. In startup.cs in cofigure method add - app.UseNodeModules(env);

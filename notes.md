@@ -459,3 +459,63 @@ npm
 1. manage nugetpackage
 2. OdeToCode.UseNodeModules - instal
 3. In startup.cs in cofigure method add - app.UseNodeModules(env);
+
+
+## Module 7 - Working with the Internals of ASP.NET Core
+
+### Program.cs
+
+Convention for .net application:
+ - static Main method inside class Program - it is an entry point for command line applications. 
+
+
+ ### Middleware
+ Configure method of statrtup class is a place where we install our middleware. 
+
+
+ Middleware assembly consists of 3 parts:
+  1. Logger
+  2. Authorizer
+  3. Router
+
+  This process is bidirectional.
+
+
+### Building custom middleware component
+
+
+1. in Configure add:
+    app.Use(SayHelloMiddleware)
+2. ctrl + . - to create a method
+3. Request delegate is a delegate that take HttpContext and returns Task
+
+
+### Logging 
+
+In appsettings.json there is a section to define how many details should be included in the log:
+``` json 
+"Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  }
+```
+in above case (defualt case) there will be logged only warnings and errors.
+
+We can log some actions / events from every page / middleware part. 
+To do it from page:
+1. inject into contructor for model :
+``` c#
+ILogger<Listmodel> logger
+
+```
+2. create and initialize field logger 
+``` c#
+private readonly ILogger<ListaModel> logger;
+```
+
+3. in Onget method we can now do following statement:
+``` c#
+  logger.LogError("Executing ListaModel");
+
+
